@@ -8,7 +8,7 @@ const Header = () => {
         Início
       </Link>
       <Nav className="flex-row" navbar>
-        <Link href="/products" className="nav-link">
+        <Link href="/product" className="nav-link">
           Produtos
         </Link>
         <Link href="/cart" className="nav-link">

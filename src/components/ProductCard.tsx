@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { Button, Card, CardBody, CardSubtitle } from "reactstrap"
 import { ProductType } from "@/pages/api/services/products"
 import SuccessToast from "./SuccessToast"
+import { useCart } from "@/hooks/useCart"
 
 type ProductCardProps = {
   product: ProductType
@@ -12,6 +13,7 @@ type ProductCardProps = {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [toastIsOpen, setToastIsOpen] = useState(false)
   const { id, name, imageUrl, price } = product
+  const { addProduct } = useCart()
 
   return (
     <>
@@ -32,23 +34,39 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </CardSubtitle>
 
         <Button
-          color="dark"
-          className="pb-2"
-          block
-          onClick={() => {
-            setToastIsOpen(true)
-            setTimeout(() => setToastIsOpen(false), 1000 * 3)
-          }}
-        >
-          Adicionar ao Carrinho
-        </Button>
+            color="dark"
+            className="pb-2"
+            block
+            onClick={() => {
+              addProduct(product)
+              setToastIsOpen(true)
+              setTimeout(() => setToastIsOpen(false), 1000 * 3)
+            }}
+          >
+            Adicionar ao Carrinho
+          </Button>
 
       </CardBody>
     </Card>
 
     <SuccessToast toastIsOpen={toastIsOpen} setToastIsOpen={setToastIsOpen} />
+
+    <Button
+            color="dark"
+            className="pb-2"
+            block
+            onClick={() => {
+              addProduct(product)
+              setToastIsOpen(true)
+              setTimeout(() => setToastIsOpen(false), 1000 * 3)
+            }}
+          >
+            Adicionar ao Carrinho
+          </Button>
+
     </>
     
+
   )
 }
 
